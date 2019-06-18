@@ -14,23 +14,21 @@ namespace BlogMVCApp.Controllers
     {
         private BlogContext db = new BlogContext();
 
-        // GET: Category
         public ActionResult Index()
         {
             var model = db.Kategoriler.Select(i => new CategoryViewModel
             {
 
-                Category=i,
-                BlogSayisi=i.Bloglar.Count
+                Category = i,
+                BlogSayisi = i.Bloglar.Count
 
             });
-      
+
 
 
             return View(model.ToList());
         }
 
-        // GET: Category/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,18 +43,14 @@ namespace BlogMVCApp.Controllers
             return View(category);
         }
 
-        // GET: Category/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Category/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,KategoriAdi")] Category category)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +62,6 @@ namespace BlogMVCApp.Controllers
             return View(category);
         }
 
-        // GET: Category/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,23 +76,26 @@ namespace BlogMVCApp.Controllers
             return View(category);
         }
 
-        // POST: Category/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,KategoriAdi")] Category category)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                var kategori = db.Kategoriler.Find(category.Id);
+                if (kategori != null)
+                {
+                    kategori.Id = category.Id;
+                    kategori.KategoriAdi = category.KategoriAdi;
+                }
+
                 db.SaveChanges();
+                TempData["kategori"] = kategori;
                 return RedirectToAction("Index");
             }
             return View(category);
         }
 
-        // GET: Category/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,7 +110,6 @@ namespace BlogMVCApp.Controllers
             return View(category);
         }
 
-        // POST: Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -125,13 +120,11 @@ namespace BlogMVCApp.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        public ActionResult KategoriListesi()
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return PartialView("_PartialKategoriListesi",db.Kategoriler.ToList());
         }
+
+
     }
 }

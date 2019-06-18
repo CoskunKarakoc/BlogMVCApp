@@ -1,19 +1,17 @@
 ﻿@model BlogMVCApp.Models.Category
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Kategori Ekle";
 }
 
-<h2>Create</h2>
-
+<h2 class="text-center text-muted">Kategori Ekle</h2>
+<hr />
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Category</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.KategoriAdi, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -25,14 +23,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Ekle</button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="text-right">
+    <a href="@Url.Action("Index","Category")" class="btn btn-sm btn-secondary"><i class="fa fa-hand-o-left"></i> Listeye Geri Dön</a>
 </div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>

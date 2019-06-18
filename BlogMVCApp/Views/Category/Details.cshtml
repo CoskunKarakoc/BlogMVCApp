@@ -4,11 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<h2 class="text-center text-muted">Kategori Detay</h2>
+<hr />
 <div>
-    <h4>Category</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.KategoriAdi)
@@ -21,6 +19,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit","Category",new{id=Model.Id})" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> Güncelle</a>
+    <a href="@Url.Action("Index","Category")" class="btn btn-sm btn-secondary"><i class="fa fa-hand-o-left"></i> Listeye Geri Dön</a>
 </p>

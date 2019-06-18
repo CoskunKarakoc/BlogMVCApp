@@ -1,0 +1,18 @@
+﻿
+@using (Html.BeginForm("List","Blog",FormMethod.Get))
+{
+    <div class="card border-primary mt-5 mb-3" style="max-width: 18rem;">
+        <div class="card-body text-primary">
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                  @Html.TextBox("q",null,new {@class="form-control",placeholder="Ara.."})
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}

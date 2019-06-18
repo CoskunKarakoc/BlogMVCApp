@@ -1,5 +1,4 @@
 ﻿using BlogMVCApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +12,20 @@ namespace BlogMVCApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(context.Bloglar.ToList());
+            var model = context.Bloglar
+                .Select(x => new BlogModel()
+                {
+                    Anasayfa = x.Anasayfa,
+                    Onay = x.Onay,
+                    Aciklama = x.Aciklama,
+                    EklenmeTarihi = x.EklenmeTarihi,
+                    Resim = x.Resim,
+                    Id = x.Id,
+                    Baslik = x.Baslik.Length > 100 ? x.Baslik.Substring(0, 100) : x.Baslik
+                })
+                .Where(x => x.Onay == true && x.Anasayfa == true);
+
+            return View(model.ToList());
         }
     }
 }

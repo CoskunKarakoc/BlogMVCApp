@@ -1,82 +1,62 @@
 ﻿@model BlogMVCApp.Models.Blog
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Blog Detay";
 }
 
-<h2>Details</h2>
+<h2 class="text-center text-muted">Blog Detay</h2>
+<hr />
 
-<div>
-    <h4>Blog</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.KategoriAdi)
-        </dt>
+<div class="card mt-5 col-md-8">
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.KategoriAdi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Baslik)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Baslik)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Aciklama)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Aciklama)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Resim)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Resim)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Icerik)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Icerik)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EklenmeTarihi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EklenmeTarihi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Onay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Onay)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Anasayfa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Anasayfa)
-        </dd>
-
-    </dl>
+    <img class="card-img-top card-img" src="http://lorempixel.com/g/900/300" alt="" />
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h5>@Model.Baslik</h5>
+            </div>
+            <div class="col-md-4 text-right">
+                <i class="fa fa-clock-o"></i> @Model.EklenmeTarihi
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        @Model.Aciklama
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="col-md-8 mt-4">
+    <a href="@Url.Action("Edit","Blog",new {id=Model.Id})" class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Güncelle</a>
+    <a href="@Url.Action("Index","Blog")" class="btn btn-sm btn-secondary"><i class="fa fa-hand-o-left"></i> Listeye Geri Dön</a>
+</div>
+<div class="comment mt-5">
+    <form>
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Yorumunuz..." id="comment" rows="5"></textarea>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-send"></i> Gönder</button>
+
+        </div>
+    </form>
+</div>
+<div class="media">
+    <img src="http://lorempixel.com/g/50/50" class="mr-3" alt="...">
+    <div class="media-body">
+        <h5 class="mt-0">Media heading</h5>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+        <div class="media mt-3">
+            <a class="mr-3" href="#">
+                <img src="http://lorempixel.com/g/50/50" class="mr-3" alt="...">
+            </a>
+            <div class="media-body">
+                <h5 class="mt-0">Media heading</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </div>
+    </div>
+</div>
+@section SagKolon{
+    @Html.Partial("_PartialSearch")
+    @Html.Action("KategoriListesi", "Category")
+}

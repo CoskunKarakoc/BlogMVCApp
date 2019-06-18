@@ -4,13 +4,30 @@
     ViewBag.Title = "Index";
 }
 
+
+
 <h2 class="text-center text-muted">Blog Listesi</h2>
+@if (TempData["blog"] != null)
+{
+    var blog = TempData["blog"] as BlogMVCApp.Models.Blog;
+    <div class="alert alert-info">
+        <div class="col-md-12">
+            <strong><i class="fa fa-5x fa-info"></i> @blog.Baslik</strong>
+            adlı blog başarıyla güncellendi!
+        </div>
+
+    </div>
+}
+
+
+
+
 
 <p>
-    @Html.ActionLink("Yeni Blog", "Create", null, new { @class = "btn btn-sm btn-success" })
+    <a href="@Url.Action("Create","Blog")" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Yeni Blog</a>
 </p>
 <hr />
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered table-hover table-sm table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Category.KategoriAdi)
@@ -36,7 +53,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Anasayfa)
         </th>
-        <th></th>
+        <th style="width:100px;"></th>
     </tr>
 
     @foreach (var item in Model)
@@ -80,11 +97,19 @@
                     <label class="badge-danger badge">Anasayfa Değil</label>
                 }
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+            <td class="text-center">
+                <a title="Edit" href="@Url.Action("Edit","Blog",new {id=item.Id})" class="text-warning"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                <a title="Details" href="@Url.Action("Details","Blog",new {id=item.Id})" class="text-info"><i class="fa fa-info"></i></a>&nbsp;&nbsp;&nbsp;
+                <a title="Delete" href="@Url.Action("Delete","Blog",new {id=item.Id})" class="text-danger"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
     }
 </table>
+<script>
+    $(function () {
+        function explode() {
+            $(".alert").hide();
+        }
+        setTimeout(explode, 5000);
+    });
+</script>

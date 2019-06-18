@@ -9,6 +9,7 @@
         <p>Uygun Blog Yazısı Bulunamadı!</p>
     </div>
 }
+
 <h2 class="text-center text-muted">Blog Listesi</h2>
 
 @foreach (var item in Model)
@@ -35,6 +36,5 @@
 
 
 @section SagKolon{
-    @Html.Partial("_PartialSearch")
     @Html.Action("KategoriListesi", "Category")
 }

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BlogMVCApp.Models.Category>
+
+
+<div class="card border-primary mt-5 mb-3" style="max-width: 18rem;">
+    <div class="card-header text-primary text-center">Kategoriler</div>
+    <div class="card-body text-primary">
+
+        <div class="col-md-12">
+
+            @foreach (var item in Model)
+            {
+
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="@Url.Action("List","Blog",new{id=item.Id})">@item.KategoriAdi</a></li>
+                </ul>
+            }
+
+
+        </div>
+
+    </div>
+</div>
